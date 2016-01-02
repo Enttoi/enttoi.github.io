@@ -53,18 +53,223 @@
                 <ul>
                     <li>
                         <i>Storage tables</i> - store raw data as it received from censors.
-                        <img src="images/datamodel_storage_tables.png" alt="Enttoi Storage tables">
+                        <table class="compact">
+                            <caption>SensorsHistory</caption>
+                            <tr>
+                                <th>Field</th>
+                                <th>[Structure]/Type/"Value"</th>
+                            </tr>
+
+                            <tr>
+                                <td>Partition Key</td>
+                                <td>[ClientId]_[SensorType]_[SensorId]</td>
+                            </tr>
+                            <tr>
+                                <td>Row Key</td>
+                                <td>Timestamp in Unix format</td>
+                            </tr>
+                            <tr>
+                                <td>ClientId</td>
+                                <td>String (Guid)</td>
+                            </tr>
+                            <tr>
+                                <td>SensorType</td>
+                                <td>String</td>
+                            </tr>
+                            <tr>
+                                <td>SensorId</td>
+                                <td>Int32</td>
+                            </tr>
+                            <tr>
+                                <td>State</td>
+                                <td>Int32</td>
+                            </tr>
+                            <tr>
+                                <td>TimeStamp</td>
+                                <td>DateTime</td>
+                            </tr>
+                        </table>
+                        <table class="compact">
+                            <caption>SensorsState</caption>
+                            <tr>
+                                <th>Field</th>
+                                <th>[Structure]/Type/"Value"</th>
+                            </tr>
+                            <tr>
+                                <td>Partition Key</td>
+                                <td>[ClientID]</td>
+                            </tr>
+                            <tr>
+                                <td>Row Key</td>
+                                <td>[SensorType]_[SensorID]</td>
+                            </tr>
+                            <tr>
+                                <td>ClientId</td>
+                                <td>String (Guid)</td>
+                            </tr>
+                            <tr>
+                                <td>SensorType</td>
+                                <td>String</td>
+                            </tr>
+                            <tr>
+                                <td>SensorId</td>
+                                <td>Int32</td>
+                            </tr>
+                            <tr>
+                                <td>State</td>
+                                <td>Int32</td>
+                            </tr>
+                            <tr>
+                                <td>TimeStamp</td>
+                                <td>DateTime</td>
+                            </tr>
+                            <tr>
+                                <td>PreviousState</td>
+                                <td>Int32</td>
+                            </tr>
+                            <tr>
+                                <td>PreviousStateDurationMs</td>
+                                <td>Int32</td>
+                            </tr>
+                        </table>
+                        <table class="compact">
+                            <caption>ClientState</caption>
+                            <tr>
+                                <th>Field</th>
+                                <th>[Structure]/Type/"Value"</th>
+                            </tr>
+                            <tr>
+                                <td>Partition Key</td>
+                                <td>[SensorId]</td>
+                            </tr>
+                            <tr>
+                                <td>Row Key</td>
+                                <td>"LastPing"</td>
+                            </tr>
+                            <tr>
+                                <td>ClientId</td>
+                                <td>String</td>
+                            </tr>
+                            <tr>
+                                <td>TimeStamp</td>
+                                <td>DateTime</td>
+                            </tr>
+                        </table>
                     </li>
                     <li>
                         <i>Storage queues</i> - notifies on changes to states.
-                        <img src="images/datamodel_storage_queues.png" alt="Enttoi Storage queues">
+
+                        <table class="compact">
+                            <caption>sensor-state-changed</caption>
+                            <tr>
+                                <th>Property</th>
+                                <th>Type</th>
+                            </tr>
+                            <tr>
+                                <td>clientId</td>
+                                <td>String (Guid)</td>
+                            </tr>
+                            <tr>
+                                <td>sensorType</td>
+                                <td>String</td>
+                            </tr>
+                            <tr>
+                                <td>sensorId</td>
+                                <td>String</td>
+                            </tr>
+                            <tr>
+                                <td>newState</td>
+                                <td>String</td>
+                            </tr>
+                            <tr>
+                                <td>previousState</td>
+                                <td>String</td>
+                            </tr>
+                            <tr>
+                                <td>previousStateDurationMs</td>
+                                <td>Number</td>
+                            </tr>
+                            <tr>
+                                <td>timestamp</td>
+                                <td>DateTime</td>
+                            </tr>
+                        </table>
+                        <table class="compact">
+                            <caption>client-state-changed</caption>
+                            <tr>
+                                <th>Property</th>
+                                <th>Type</th>
+                            </tr>
+                            <tr>
+                                <td>clientId</td>
+                                <td>String (Guid)</td>
+                            </tr>
+                            <tr>
+                                <td>newState</td>
+                                <td>Boolean</td>
+                            </tr>
+                            <tr>
+                                <td>previousStateDurationMs</td>
+                                <td>Number</td>
+                            </tr>
+                            <tr>
+                                <td>timestamp</td>
+                                <td>DateTime</td>
+                            </tr>
+                        </table>
                     </li>
                     <li>
                         <i>DocumentDB</i> - configurations and processed state of clients and sensors
-                        <img src="images/datamode_documentdb.png" alt="Enttoi DocumentDB">
+                        <table class="compact">
+                            <caption>ClientsCollection</caption>
+                            <tr>
+                                <th>Property</th>
+                                <th>Type</th>
+                            </tr>
+                            <tr>
+                                <td>id</td>
+                                <td>String (Guid)</td>
+                            </tr>
+                            <tr>
+                                <td>isDisabled</td>
+                                <td>Boolean</td>
+                            </tr>
+                            <tr>
+                                <td>token</td>
+                                <td>String</td>
+                            </tr>
+                            <tr>
+                                <td>tags</td>
+                                <td>Array of string</td>
+                            </tr>
+                            <tr>
+                                <td>isOnline</td>
+                                <td>Boolean</td>
+                            </tr>
+                            <tr>
+                                <td>isOnlineChanged</td>
+                                <td>DateTime</td>
+                            </tr>
+                            <tr>
+                                <td>Sensors</td>
+                                <td>
+                                    Array of
+                                    <table>
+                                        <tr>
+                                            <td>sensorType</td>
+                                            <td>String</td>
+                                        </tr>
+                                        <tr>
+                                            <td>sensorId</td>
+                                            <td>Int32</td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </table>
                     </li>
                 </ul>
-                
+
             </p>
 
 
