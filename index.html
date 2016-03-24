@@ -45,7 +45,18 @@
                     <img src="images/architecture_diagram.png" alt="Enttoi Architecture">
                 </a>
             </p>
-
+<p>
+    Here are blocks mapped to source code:
+    <ul>
+        <li><a href="https://github.com/Enttoi/enttoi-client-rpi" target="_blank">Rpi client</a></li>
+        <li><a href="https://github.com/Enttoi/enttoi-gateway" target="_blank">Gateway</a> - endpoint for all clients/sensors; receives their states, figures out whether it was changed and based on it persist it and sends notification to MQ.</li>
+        <li><a href="https://github.com/Enttoi/enttoi-jobs/tree/master/src/ClientsState" target="_blank">State processing</a> - background job to monitor availbility of clients. If a client didn't report state or keep alive during some period it will notify that the client went offline. </li>
+        <li><a href="https://github.com/Enttoi/enttoi-jobs/tree/master/src/HistoryWriter" target="_blank">History writer</a> - monitors queues and writes all changes to state of clients and sensors.</li>
+        <li><a href="https://github.com/Enttoi/enttoi-jobs/tree/master/src/SensorStateStats" target="_blank">History processing</a> - converts historical data to queryable statistics data.</li>
+        <li><a href="https://github.com/Enttoi/enttoi-api" target="_blank">API</a> - expose meta data, states data and statistics via REST and websocket.</li>
+        <li><a href="https://github.com/Enttoi/enttoi-ui-web" target="_blank">Web client</a> - exposes API's data via web interface.</li>
+    </ul>
+</p>
             <h3>
                 <a id="data-modeling" class="anchor" href="#data-modeling" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Modeling
             </h3>
